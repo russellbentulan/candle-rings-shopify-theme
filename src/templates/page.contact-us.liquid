@@ -1,0 +1,59 @@
+{% include 'page-banner' %}
+
+<section class="wrapper wrapper--flex">
+
+  <div class="col-1-of-2">
+    {% form 'contact' %}
+
+      {% if form.posted_successfully? %}
+        <p class="form-success">
+          {{ 'contact.form.post_success' | t }}
+        </p>
+      {% endif %}
+
+      {{ form.errors | default_errors }}
+
+      <label for="ContactFormName" class="contact-form__label">{{ 'contact.form.name' | t }}:</label>
+      <input type="text"
+        name="contact[name]"
+        id="ContactFormName"
+        class="contact-form__input"
+        value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+      <label for="ContactFormEmail" class="contact-form__label">{{ 'contact.form.email' | t }}:</label>
+      <input type="email"
+        name="contact[email]"
+        id="ContactFormEmail"
+        class="contact-form__input"
+        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off">
+
+      <label for="ContactFormPhone" class="contact-form__label">{{ 'contact.form.phone' | t }}:</label>
+      <input type="tel"
+        name="contact[phone]"
+        id="ContactFormPhone"
+        class="contact-form__input"
+        value="{% if form[phone] %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+        pattern="[0-9\-]*">
+
+      <label for="ContactFormMessage" class="contact-form__label">{{ 'contact.form.message' | t }}:</label>
+      <textarea rows="10"
+        name="contact[body]"
+        id="ContactFormMessage"
+        class="contact-form__message-input">
+        {%- if form.body -%}
+          {{- form.body -}}
+        {%- endif -%}
+      </textarea>
+
+      <input type="submit" class="button contact-form__submit" value="Submit">
+
+    {% endform %}
+  </div>
+  
+  <div class="col-1-of-2">
+    {% section 'contact-us-map' %}
+  </div>
+</section>

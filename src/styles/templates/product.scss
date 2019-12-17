@@ -1,0 +1,16 @@
+.product-single {
+  &__list {
+    list-style: none;
+  }
+
+  &__item{
+
+    &--current {
+      @extend .visuallyhidden;
+    }
+  }
+
+  &__thumbnail-image {
+    border: 2px solid transparent;
+  }
+}

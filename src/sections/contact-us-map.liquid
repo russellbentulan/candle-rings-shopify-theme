@@ -1,0 +1,23 @@
+
+<p>{{ section.settings.contact_us_address }}</p>
+<div class="rte">
+    {{ section.settings.contact_us_map }}
+</div>
+
+{% schema %}
+{
+    "name": "Contact Us Map",
+    "settings": [
+        {
+            "type": "text",
+            "id": "contact_us_address",
+            "label": "Contact Us Address"
+        },
+        {
+            "type": "html",
+            "id": "contact_us_map",
+            "label": "Contact Us Map"
+        }
+    ]
+}
+{% endschema %}

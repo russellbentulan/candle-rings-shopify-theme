@@ -1,0 +1,20 @@
+$(function() {
+  const $sortBy = $("#sort-by");
+  $sortBy.on("change", function() {
+    let optionValue = $(this).val();
+    window.location.href = optionValue;
+  });
+
+  const $mainNav = $("#mainNav");
+  const $navButton = $("#mainNav__button");
+
+  $navButton.on("click", function() {
+    $mainNav.toggleClass("main-nav__list--active");
+
+    if ($mainNav.hasClass("main-nav__list--active")) {
+        $(this).attr( 'aria-expanded', 'true');
+    } else {
+        $(this).attr( 'aria-expanded', 'false');
+    }
+  });
+});

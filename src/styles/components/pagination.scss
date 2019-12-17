@@ -1,0 +1,31 @@
+.pagination {
+    list-style: none;
+    
+    li {
+        display: inline-block;
+        height: 3.5rem;
+        width: 3.5rem;
+        position: relative;
+        background-color: var(--color-body-text);
+        
+        &:not(:last-child) {
+            margin-right: 2rem;
+        }
+    }
+
+    &__text {
+        display: inline-block;
+        position: relative; top: 55%; left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--color-primary);
+    }
+
+    & li.active {
+        background-color: var(--color-primary);
+        .pagination__text { color: var(--color-body-text); }
+    }
+
+    &__container {
+        margin: $grid-gutter auto;
+    }
+}

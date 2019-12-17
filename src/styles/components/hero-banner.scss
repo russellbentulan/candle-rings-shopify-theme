@@ -1,0 +1,29 @@
+.hero-banner {
+  background-repeat: no-repeat;
+}
+
+.hero-banner--article {
+  min-height: 278px;
+  background-position: center;
+  background-size: cover;
+}
+
+// Page Banner
+.page-banner{
+  text-align: center;
+  padding: calc(#{$grid-gutter} * 4.5) 0;
+  
+  .page-banner__title {
+      text-transform: uppercase;
+      @include media-query($small){
+        font-size: 6vw;
+        letter-spacing: 5px;
+        max-width: 90%;
+      }
+  }
+
+
+  &--home {
+      padding: calc(#{$grid-gutter} * 2) 0;
+  }
+}

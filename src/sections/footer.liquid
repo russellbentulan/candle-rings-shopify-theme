@@ -1,0 +1,54 @@
+<footer>
+  <div class="wrapper wrapper--footer">
+    <a href="{{ shop.url }} class="footer-logo">
+      <img src="{{ section.settings.footer_logo | img_url: 'master' }}" alt="Candle rings logo" class="footer__logo">
+    </a>
+
+    <h3 class="footer-social__title">{{ section.settings.footer_social_title }}</h3>
+
+    <div class="social-links">
+      {% for icon in section.blocks %}
+        <a href="{{ icon.settings.footer_social_url }}" class="social-links__link">
+          {{ icon.settings.footer_social_icon }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "footer_logo",
+        "label": "Logo displayed in the footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_social_title",
+        "label": "Title displayed above footer social links"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "text",
+        "name": "social_links",
+        "settings": [
+          {
+            "type": "html",
+            "id": "footer_social_icon",
+            "label": "Font Awesome Icon Element"
+          },
+          {
+            "type": "url",
+            "id": "footer_social_url",
+            "label": "URL for the social site"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}

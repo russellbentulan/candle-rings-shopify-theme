@@ -1,0 +1,134 @@
+<section data-section-id="{{ section.id }}" data-section-type="product">
+  <div class="wrapper wrapper--flex-start">
+    <div class="col-2-of-3 product-single__left">
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+      {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+      {% for image in product.images %}
+        {% capture wrapper_class %} {%- unless featured_image == image -%} hide {%- endunless -%} {% endcapture %}
+
+        <div class="product-single__featured-image {{ wrapper_class }}">
+          {% include 'responsive-image' with
+            image: image,
+            max_width: 700,
+            max_height: 700,
+            image_attributes: "data-product-featured-image",
+            wrapper_class: wrapper_class,
+            wrapper_attributes: "data-product-image-wrapper",
+          %}
+        </div>
+      {% endfor %}
+
+      {% if product.images.size > 1 %}
+        <ul class="product-single__list" >
+          {% for image in product.images %}
+            <li class="product-single__item {% if featured_image == image %} product-single__item--current {% endif %}">
+              <a href="{{ image.src | img_url: '900x900' }}" data-thumbnail-id="{{ image.id }}" data-product-single-thumbnail class="product-single__link" {% if featured_image == image %}aria-current="true"{% endif %}>
+                <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '130x130' }}" alt="{{ image.alt | escape }}">
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    
+    <div class="col-1-of-3 product-single__right">    
+      <h1 class="product-single__title">{{ product.title }}</h1>
+      
+      <div data-price-wrapper class="product-single__price">
+        <span data-product-price>
+          {{ current_variant.price | money_without_trailing_zeros }}
+        </span>
+
+        {% if product.compare_at_price_max > product.price %}
+          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+          <s data-compare-price>
+            {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+            {% endif %}
+          </s>
+        {% endif %}
+      </div>
+
+      {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="js">
+
+              {% if forloop.index0 > 0 %}
+
+                {% for value in option.values %}
+                  <input class="product-single__option" type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
+                  <label for="Option{{ option.position }}-{{ value }}" class="product-single__option-label>{{ value }}</label>
+                {% endfor %}
+
+              {% else %}
+
+                <span class="product-single__select-arrow">
+                  <select
+                    id="Option{{ option.position }}"
+                    class="product-single__select"
+                    name="options[{{ option.name | escape }}]">
+                  
+
+                    {% for value in option.values %}
+                      <option
+                        value="{{ value | escape }}"
+                        {% if option.selected_option == value %}selected="selected"{% endif %}>
+                          {{ value }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </span>
+
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <label for="Quantity" class="product-single__option-label">{{ 'products.product.quantity' | t }}:</label>
+        <input class="product-single__select product-single__select--quantity" type="number" id="Quantity" name="quantity" value="1" min="1">
+
+        <div class="rte">
+          {{ product.description }}
+        </div>
+
+        <button
+          class="button product-single__buy"
+          type="submit"
+          name="add"
+          data-submit-button
+          {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+            <span data-submit-button-text>
+              {% if current_variant.available %}
+                {{ 'products.product.add_to_cart' | t }}
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+        </button>
+      {% endform %}
+
+
+      {% if section.settings.show_share_buttons %}
+        {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+      {% endif %}
+    </div> 
+    <!-- end of col -->
+  </div>
+  <!-- end of wrapper -->
+</section>
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show social sharing buttons",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

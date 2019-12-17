@@ -1,0 +1,33 @@
+.related-item {
+  text-align: center;
+
+  @include media-query($small) {
+    flex-basis: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: $grid-gutter;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    width: 50%;
+    max-width: 150px;
+
+    & > *:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__title {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.related-items {
+  &__wrapper {
+    padding-top: 0;
+  }
+}

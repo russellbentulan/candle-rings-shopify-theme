@@ -1,0 +1,55 @@
+
+html {
+  background-color: $color-body;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.wrapper {
+  max-width: $grid-max-width;
+  margin: 0 auto;
+}
+
+.wrapper--flex {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $grid-gutter 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper--flex-start {
+  @extend .wrapper--flex;
+  align-items: stretch;
+}
+
+.col-1-of-2 {
+  flex-basis: calc( (100% - #{$grid-gutter} ) / 2 ); 
+}
+
+.col-1-of-3 {
+  flex-basis: calc( (100% - #{$grid-gutter * 2}) / 3);
+}
+
+.col-2-of-3 {
+  flex-basis: calc( ((100% - #{$grid-gutter * 2}) / 3) * 2 + #{$grid-gutter});
+}
+
+.wrapper--footer {
+  text-align: center;
+}

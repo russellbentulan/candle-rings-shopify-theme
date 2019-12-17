@@ -1,0 +1,52 @@
+{% assign blog = blogs[section.settings.blog] %}
+
+<section class="latest-post wrapper wrapper--flex" style="background-color:{{ section.settings.section_bg_color }};">
+    {% for article in blog.articles limit: 1 %}
+        <div class="col-2-of-3 latest-post__content">
+            <p class="latest-post__label">{{ section.settings.section_label }}</p>
+                <h3>{{ article.title }}</h3>
+                {{ article.excerpt }}
+        </div>
+        <div class="col-1-of-3 latest-post__image-container">
+            <a href="{{ article.url }}">
+                {% include 'responsive-image' with
+                    image: article.image,
+                    max_width: 600,
+                    max_height: 600
+                %}
+            </a>
+        </div>
+    {% endfor %}
+</section>
+{% schema %}
+{
+    "name": "Latest Blog Post",
+    "settings": [
+        {
+            "type": "text",
+            "id": "section_label",
+            "label": "Section label"
+        },
+        {
+            "type": "blog",
+            "id": "blog",
+            "label": "Blog"
+        },
+        {
+            "type": "color",
+            "id": "section_bg_color",
+            "label": "Section background color"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Latest Blog Post",
+            "category": "Blog",
+            "settings": {
+                "section_label": "Latest Blog Post",
+                "blog": "News"
+            }
+        }
+    ]
+}
+{% endschema %}

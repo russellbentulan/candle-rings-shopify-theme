@@ -1,0 +1,47 @@
+<section class="about-section wrapper wrapper--flex" style="background-color:{{ section.settings.about_bg_color }};">
+    <div class="about-section__image-container col-1-of-3">
+        {% include 'responsive-image' with
+            image: section.settings.about_img,
+            max_width: 600,
+            max_height: 600
+        %}
+    </div>
+    <div class="about-section__content col-2-of-3">
+        <h3 class="about-section__title">{{ section.settings.about_title }}</h3>
+        {{ section.settings.about_text }}
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "About Us",
+    "settings": [
+        {
+            "type": "text",
+            "id": "about_title",
+            "label": "Section title"
+        },
+        {
+            "type": "textarea",
+            "id": "about_text",
+            "label": "Section text"
+        },
+        {
+            "type": "image_picker",
+            "id": "about_img",
+            "label": "Section image"
+        },
+        {
+            "type": "color",
+            "id": "about_bg_color",
+            "label": "Section background color"
+        }
+    ],
+    "presets" : [
+        {
+            "name": "About",
+            "category": "Custom Content"
+        }
+    ]
+}
+{% endschema %}

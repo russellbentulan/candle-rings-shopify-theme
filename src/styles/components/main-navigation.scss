@@ -1,0 +1,129 @@
+// Navigation
+.main-nav {
+	@include media-query($medium-down) {
+		min-height: 5rem;
+	}
+
+  &__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: $grid-gutter 0;
+    padding: 0;
+    z-index: 5;
+
+    @include media-query($medium-down) {
+      &:not(.main-nav__list--active) {
+        display: none;
+      }
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			padding: 6.4rem 5% 2.4rem 2.4rem;
+      flex-direction: column;
+      align-items: flex-end;
+			text-align: left;
+    }
+  }
+
+  &__list-item {
+    &:not(:last-child) {
+      margin-right: 5rem;
+    }
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+		}
+		
+		@include media-query($medium-down) {
+			&:not(:last-child) {
+        margin-right: 0;
+      }
+
+      border-bottom: 2px solid #FFF;
+			margin: .8rem 0;
+      text-align: right;
+      
+      a {
+        padding: .8rem;
+
+        &:hover {
+          color: #FFF;
+        }
+      }
+		}
+  }
+
+  &__left {
+    flex: 1;
+  }
+
+  &__logo {
+    text-align: center;
+
+    @include media-query($medium-down) {
+			display: none;
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    @include media-query($medium-down) {
+			flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__link {
+    @include media-query($medium-down) {
+      padding: 1.6rem 0;
+      display: block;
+    }
+  }
+
+  &__button {
+    padding: 0;
+		border: 0;
+		font-size: 3.8rem;
+    z-index: 100;
+    background-color: transparent;
+
+    i {
+      padding: 1rem;
+      font-size: 3rem;
+      text-shadow: 2px 2px 0 #000;
+      transition: .2s text-shadow;
+
+      &:hover {
+        text-shadow: 3px 2.5px 0 #000;
+      }
+    }
+	}
+	
+	&__mobile-nav {
+		display: none;
+
+		@include media-query($medium-down) {
+			display: flex;
+			background: #FFF;
+			width: 100%;
+			justify-content: space-between;
+		}
+	}
+
+	&__logo-image--mobile {
+		width: 25%;
+		margin: 2rem 0;
+
+		@include media-query(small) {
+			width: 40%;
+		}
+	}
+}

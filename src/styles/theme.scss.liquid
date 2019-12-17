@@ -1,0 +1,109 @@
+/**
+* Insert your styles with Liquid below.
+*
+* Import additional stylesheets into this sheet using CSS imports:
+* @import url('./global/form.scss');
+*/
+a {
+    color: {{ settings.color_body_text }};
+
+    &:hover{
+        color: {{ settings.color_accent }};
+    }
+}
+
+.button--white {
+background-color: #fff;
+box-shadow: 3px 3px 0px 2px {{ settings.color_accent }};
+}
+
+.button--accent-color {
+color: #FFF;
+background-color: {{ settings.color_accent }};
+box-shadow: 3px 3px 0px 2px white;
+}
+
+.button--accent-color:hover {
+color: #000;
+}
+
+.button--main-color {
+background-color: {{ settings.color_primary }};
+box-shadow: 3px 3px 0px 2px white;
+}
+
+footer {
+    background-color: {{ settings.color_footer_bg }};
+
+    .social-links {
+
+    .social-links__link {
+        color: {{ settings.color_accent }};
+        font-size: 6rem;
+
+        &:hover {
+            color: {{ settings.color_body_text }};
+        }
+
+        &:not(:last-child) {
+            margin-right: 2rem;
+        }
+    }
+    }
+}
+
+.page-banner {
+background-image: linear-gradient(
+    to right, 
+    {{ settings.color_accent_1 }} 50%, 
+    {{ settings.color_accent_2 }} 0%);
+
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.latest-post__label {
+display: inline-block;
+background-color: {{ settings.color_accent }};
+color: #FFF;
+margin-bottom: 1.8rem;
+}
+
+.latest-post {
+color: {{ settings.color_body_text }};
+}
+
+.breadcrumb-trail i { 
+    color: {{ settings.color_accent }};
+}
+
+.filter-colours {
+border-right: 2px solid {{ settings.color_primary }};
+}
+
+.active a {
+    color: {{ settings.color_accent }};
+}
+
+.active a:hover {
+    color: {{ settings.color_accent_2 }};
+}
+
+.collection-item {
+    color: {{ settings.color_accent }};
+}
+
+.collection-item__title {
+    color: {{ settings.color_body_text }};
+}
+
+.main-nav__list--active {
+    background-color: {{ settings.color_accent }};
+    color: #FFF;
+}
+
+.main-nav__button i {
+    background-color: {{ settings.color_accent }};
+    color: #FFF;
+}

@@ -1,0 +1,52 @@
+@charset 'UTF-8';
+
+/**
+ * Candle Rings | Built with Slate
+ */
+@import '~normalize.css/normalize';
+
+// Settings
+@import './variables';
+
+// Tools
+@import './tools/mixins';
+@import './tools/functions';
+
+// Core
+@import './core/forms';
+@import './core/helpers';
+@import './core/layout';
+@import './core/media';
+@import './core/responsive-tables';
+@import './core/rte';
+@import './core/typography';
+
+// Components
+@import './components/buttons';
+@import './components/hero-banner';
+@import './components/icons';
+@import './components/placeholders';
+@import './components/responsive-images';
+@import './components/address-forms';
+@import './components/main-navigation.scss';
+@import './components/breadcrumb.scss';
+@import './components/pagination.scss';
+@import './components/footer.scss';
+
+// Sections
+@import './sections/blog-posts';
+@import './sections/collection-list';
+@import './sections/featured-collection';
+@import './sections/image-with-text';
+@import './sections/related-products';
+
+// Templates
+@import './templates/gift_card';
+@import './templates/product';
+@import './templates/collections.scss';
+@import './templates/contact-us.scss';
+@import './templates/product-single.scss';
+@import './templates/article.scss';
+
+// Pages
+@import './pages/home.scss';

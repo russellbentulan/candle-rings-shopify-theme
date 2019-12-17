@@ -1,0 +1,26 @@
+// Custom dynamic sections
+.about-section,
+.latest-post {
+    padding: $grid-gutter;
+
+    &__image-container {
+        @include media-query($medium-down) {
+            order: -1;
+            flex-basis: 100%;
+        }
+    }
+
+    &__content {
+        padding: 2rem 0;
+    }
+}
+
+.latest-post {
+    margin: $grid-gutter auto;
+
+    &__label {
+        text-transform: uppercase;
+        padding: .8rem 1.6rem .45rem 1.6rem;
+        line-height: 1;
+    }
+}

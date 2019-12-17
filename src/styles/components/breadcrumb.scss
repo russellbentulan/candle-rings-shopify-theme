@@ -1,0 +1,12 @@
+.breadcrumb-trail {
+    width: 100%;
+    font-size: 2rem;
+    margin-bottom: $grid-gutter;
+
+    &__item {
+    
+        &:not(:last-child) {
+            margin-right: .5rem;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available in the "Featured Collection" section in the theme editor.
+
+  Theme Store required settings
+  - Collection
+
+  Theme Store optional settings
+  - Heading: title of the featured collection section
+{%- endcomment -%}
+<section class="featured-collection page-banner page-banner--home">
+
+  {%- assign collection = collections[section.settings.collection] -%}
+
+  <a href="{{ collection.url }}" class="featured-collection__details">
+    {% if collection.image %}
+        <img class="featured-collection__image" src="{{ collection.image | img_url: 'medium' }}" 
+          {% if collection.image.alt %}
+            alt="{{ collection.image.alt }}">
+          {% endif %}
+    {% endif %}
+
+    {% if section.settings.title != blank %}
+      <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
+    {% endif %}
+      <span class="button button--white">{{ section.settings.button_text }}</span>
+  </a>
+
+  {% if section.settings.button_text != blank %}
+  {% endif %}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "id": "button_text",
+        "type": "text",
+        "label": "Button Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}

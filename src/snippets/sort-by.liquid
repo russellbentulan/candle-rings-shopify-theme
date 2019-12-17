@@ -1,0 +1,11 @@
+<label class="sort-by__label" for="sort-by">
+    <div class="sort-by__select-container">
+        <select id="sort-by">
+            {% for option in collection.sort_options %}
+            <option value="{{ shop.url }}{{ collection.url }}?sort_by={{ option.value }}">
+                {{ option.name | upcase }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+</label>

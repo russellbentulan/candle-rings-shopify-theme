@@ -1,0 +1,128 @@
+{% paginate collection.products by 9 %}
+
+  <div class="wrapper">
+    
+    {% section 'collection-hero-image' %}
+  </div>
+
+
+  <div class="collection--all wrapper wrapper--flex">
+
+   <!-- bread crumb trail -->
+   <!-- only shown on child pages -->
+   {% if collection.id != collections['all'].id %}
+    {% include 'breadcrumbs' %}
+   {% endif %}
+
+    <aside class="filter-colours">
+      {% if collection.all_tags.size > 0 %}
+
+        <p class="filter-colours__title">Filter by colour</p>
+        <ul class="filter-colours__container">
+          {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+              <li class="tag_{{ tag }} filter-colours__item active">
+                {{ tag | link_to_remove_tag: tag  }}
+              </li>
+            {% else %}
+              <li class="tag_{{ tag }} filter-colours__item">
+                {{ tag | link_to_tag: tag }}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+      {% endif %}
+    </aside>
+
+    <div class="collection--main">
+
+      <!-- sort-by snippet -->
+      <div class="sort-by__container">
+        Sort by: 
+        {% include 'sort-by' %}
+      </div>
+
+      <!-- products in collection for loop -->
+      <div class="collection-item__container">
+        {% for product in collection.products %}
+          <div class="collection-item">
+            {% if product.featured_image != blank %}
+              <a href="{{ product.url | within: collection }}">
+                {% include 'responsive-image' with
+                  image: product.featured_image,
+                  max_width: 700,
+                  max_height: 700,
+                  wrapper_class: 'collection-item__image-wrapper',
+                  image_class: 'collection-item__image'
+                %}
+              </a>
+            {% endif %}
+
+            <p>
+              <a href="{{ product.url | within: collection }}" class="collection-item__title">{{ product.title }}</a>
+            </p>
+            <p>
+              {% if product.compare_at_price > product.price %}
+
+                {% if product.price_varies %}
+                  {%- assign sale_price = product.price | money -%}
+                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                {% else %}
+                  {{ 'products.product.on_sale' | t }}
+                  {{ product.price | money }}
+                {% endif %}
+
+              {% else %}
+
+                {% if product.price_varies %}
+                  {%- assign price = product.price | money -%}
+                  {{ 'products.product.from_text_html' | t: price: price }}
+                {% else %}
+                  {{ product.price | money }}
+                {% endif %}
+
+              {% endif %}
+
+              {% if product.compare_at_price > product.price %}
+                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                <s>{{ product.compare_at_price | money }}</s>
+              {% endif %}
+
+              {% unless product.available %}
+                {{ 'products.product.sold_out' | t }}
+              {% endunless %}
+            </p>
+          </div>
+
+        {% else %}
+          {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+            {% for i in (1..8) %}
+              <a href="#">
+                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+              </a>
+
+              <p>
+                <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+              </p>
+
+              <p>
+                {{ 1999 | money }}
+              </p>
+            {% endfor %}
+          {% else %}
+            <p>{{ 'collections.general.no_matches' | t }}</p>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    {% endpaginate %}
+    </div><!-- .collection--main -->
+
+  </div> <!-- .collection--all -->
